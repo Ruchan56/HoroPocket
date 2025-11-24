@@ -105,7 +105,7 @@ const color = [
   "ネイビー", "ワインレッド", "ライトグリーン", "ターコイズ", "ラベンダー"
 ];
 
-// ここに占い結果を出す関数を追加する
+// 複雑なハッシュ関数で毎日同じ結果
 function hashString(str) {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -114,6 +114,7 @@ function hashString(str) {
   return hash;
 }
 
+// 占い結果を表示する関数
 function showFortune() {
   const name = document.getElementById("name").value.trim();
   const birth = document.getElementById("birth").value.trim();
@@ -136,5 +137,4 @@ function showFortune() {
   const resultText = `🎉 今日の運勢：${rankingResult} 🎉\n\n【総合運】${generalResult}\n【恋愛運】${loveResult}\n【金運・仕事運】${moneyResult}\n【アドバイス】${adviceResult}\n【ラッキーカラー】${colorResult}`;
 
   document.getElementById("result").innerText = resultText;
-
 }
