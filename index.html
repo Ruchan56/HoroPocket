@@ -125,7 +125,42 @@
         <button onclick="showFortune()">占う</button>
       </div>
 
-      <div id="result"></div>
+      <div id="result">function showFortune() {
+  const name = document.getElementById("name").value;
+  const birth = document.getElementById("birth").value;
+
+  if (!name || !birth) {
+    alert("名前と生年月日を入力してください");
+    return;
+  }
+
+  // 名前＋生年月日でハッシュ作る（同じ人は同じ結果）
+  const seed = hashCode(name + birth);
+  const keys = Object.keys(fortunes);
+  const luck = keys[seed % keys.length];
+  const data = fortunes[luck];
+
+  document.getElementById("result").innerHTML = `
+    <h2>今日のあなたは...</h2>
+    <div style="font-size:48px; margin:20px 0;">${luck}</div>
+    <p><strong>総合運:</strong> ${data["総合運"]}</p>
+    <p><strong>恋愛運:</strong> ${data["恋愛運"]}</p>
+    <p><strong>金運:</strong> ${data["金運"]}</p>
+    <p><strong>アドバイス:</strong> ${data["アドバイス"]}</p>
+    <p><strong>ラッキーカラー:</strong> ${data["ラッキーカラー"]}</p>
+  `;
+}
+
+// 簡単なハッシュ関数
+function hashCode(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    hash = hash & hash;
+  }
+  return Math.abs(hash);
+}
+</div>
 
     </main>
   </div>
@@ -133,6 +168,7 @@
   <script src="horopocket.js"></script>
 </body>
 </html>
+
 
 
 
