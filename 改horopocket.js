@@ -108,8 +108,8 @@ const color = [
 // ここに占い結果を出す関数を追加する
 function hashString(str) {
   let hash = 0;
-  for(let i=0; i<str.length; i++){
-    hash += str.charCodeAt(i);
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash * 31 + str.charCodeAt(i)) % 1000000007;
   }
   return hash;
 }
@@ -136,4 +136,5 @@ function showFortune() {
   const resultText = `🎉 今日の運勢：${rankingResult} 🎉\n\n【総合運】${generalResult}\n【恋愛運】${loveResult}\n【金運・仕事運】${moneyResult}\n【アドバイス】${adviceResult}\n【ラッキーカラー】${colorResult}`;
 
   document.getElementById("result").innerText = resultText;
+
 }
