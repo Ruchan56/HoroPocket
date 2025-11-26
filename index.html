@@ -1,131 +1,166 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HoroPocket - 今日の運勢</title>
-  <style>
-    :root{
-      --bg:#f6efe6;
-      --panel:#f7f2ea;
-      --accent:#6b4b2b;
-      --gold:#c49a4a;
-      --muted:#a08873;
-      --radius:14px;
-      --max-width:900px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Segoe UI", Roboto, "Noto Sans JP", "Noto Sans", sans-serif;
-      background:var(--bg);
-      color:var(--accent);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-      display:flex;justify-content:center;
-      padding:28px 20px;
-    }
-    .wrap{width:100%;max-width:var(--max-width)}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>占い</title>
 
-    .hero{
-      background:var(--panel);
-      border-radius:18px;
-      padding:40px 32px;
-      text-align:center;
-      box-shadow:0 6px 18px rgba(30,20,10,0.04);
-      position:relative;
-    }
+<style>
+  :root{
+    --bg:#f7f1e6;
+    --text:#4a3b2a;
+    --panel:#f3ebdd;
+  }
 
-    .title-sub{
-      font-size:18px;
-      color:var(--muted);
-      letter-spacing:0.08em;
-      margin-bottom:6px;
-    }
-    h1.title{
-      margin:6px 0 2px;
-      font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
-      font-weight:600;
-      font-size:54px;
-      line-height:1.0;
-      color:var(--accent);
-      letter-spacing:0.02em;
-    }
-    p.lead{
-      margin:6px 0 28px;
-      color:var(--muted);
-      font-size:18px;
-    }
+  body{
+    margin:0;
+    font-family:"Hiragino Mincho ProN","Yu Mincho","serif";
+    background:var(--bg);
+    color:var(--text);
+    text-align:center;
+  }
 
-    /* 入力欄の箱デザイン */
-    .form-area{
-      margin-top:24px;
-      padding:26px;
-      border-radius:var(--radius);
-      background:white;
-      box-shadow:0 4px 12px rgba(0,0,0,0.05);
-      display:inline-block;
-      text-align:center;
-    }
-    input{
-      padding:12px;
-      width:80%;
-      max-width:260px;
-      margin:10px;
-      border-radius:8px;
-      border:1px solid #ddd;
-      font-size:16px;
-    }
-    button{
-      padding:12px 24px;
-      font-size:18px;
-      border-radius:8px;
-      border:none;
-      background:var(--accent);
-      color:white;
-      cursor:pointer;
-      margin-top:10px;
-    }
-    button:hover{ opacity:0.9; }
+  .top-area{
+    padding:40px 20px 20px;
+    background:var(--panel);
+  }
 
-    #result{
-      margin-top:26px;
-      background:white;
-      padding:24px;
-      border-radius:var(--radius);
-      box-shadow:0 4px 12px rgba(0,0,0,0.05);
-      font-size:20px;
-      font-weight:bold;
-      white-space:pre-line;
-    }
-  </style>
+  .lead{
+    font-size:18px;
+    letter-spacing:0.15em;
+    margin-bottom:20px;
+  }
+
+  .sunmoon{
+    width:260px;
+    max-width:60%;
+    height:auto;
+  }
+
+  .title{
+    font-size:70px;
+    margin:20px 0 40px;
+  }
+
+  .input-block{
+    padding:40px 0;
+  }
+
+  .input-label{
+    font-size:22px;
+    margin:20px 0 10px;
+  }
+
+  input[type="text"],
+  input[type="date"]{
+    width:80%;
+    max-width:420px;
+    padding:12px 16px;
+    font-size:20px;
+    border-radius:6px;
+    border:1px solid rgba(0,0,0,0.15);
+    background:white;
+    color:var(--text);
+    margin-bottom:16px;
+  }
+
+  button{
+    padding:14px 30px;
+    font-size:20px;
+    border:none;
+    border-radius:8px;
+    background:#c7b28a;
+    color:white;
+    cursor:pointer;
+    margin-top:20px;
+  }
+
+  #result{
+    margin-top:40px;
+    font-size:20px;
+    line-height:1.9;
+    padding:0 20px 50px;
+  }
+
+  @media(max-width:480px){
+    .title{ font-size:48px; }
+    .sunmoon{ width:200px; }
+  }
+</style>
 </head>
 <body>
 
-  <div class="wrap">
-    <main class="hero" role="main" aria-labelledby="site-title">
+  <div class="top-area">
+      <div class="lead">あなたの未来を占います</div>
+      <img src="sunmoon.png" alt="太陽と月" class="sunmoon">
+      <div class="title">占い</div>
+  </div>
 
-      <div class="title-sub">あなたの未来を占います</div>
+  <div class="input-block">
+      <div class="input-label">名前</div>
+      <input type="text" id="name" placeholder="名前を入力">
 
-      <!-- ★★★ 太陽と月のイラスト（消していない） ★★★ -->
-      <img src="sunmoon.png" alt="太陽と月" class="astro" style="width:200px;height:200px;margin:8px 0 22px;">
+      <div class="input-label">生年月日</div>
+      <input type="date" id="birth">
 
+      <button onclick="showFortune()">占う</button>
+  </div>
 
-      <h1 id="site-title" class="title">HoroPocket</h1>
-      <p class="lead">名前と生年月日を入力してね</p>
+  <div id="result"></div>
 
-      <!-- ★★★ 「ココ」削除 → 入力欄に置き換え ★★★ -->
-      <div class="form-area">
-        <input type="text" id="name" placeholder="名前">
-        <br>
-        <input type="date" id="birth">
-        <br>
-        <button onclick="showFortune()">占う</button>
-      </div>
+<script>
+// ------------------------
+// 占いデータ
+// ------------------------
+const fortunes = {
+  "大吉": {
+    "総合運": "今日はラッキーな日。小さな幸せを見逃さないで",
+    "恋愛運": "大切な人とコミュニケーションを取ると吉",
+    "金運": "臨時収入があるかも。チャンスを逃さないで。",
+    "アドバイス": "ポジティブな気持ちで過ごすと運気アップ",
+    "ラッキーカラー": "赤"
+  },
+  "吉": {
+    "総合運": "今日は少し良いことがありそう。",
+    "恋愛運": "積極的な行動が吉",
+    "金運": "無駄遣いを控えれば安定",
+    "アドバイス": "人との関わりを大切にすると吉",
+    "ラッキーカラー": "青"
+  },
+  "中吉": {
+    "総合運": "気分が安定する日。落ち着いて行動すると吉",
+    "恋愛運": "優しくすると好感度アップ",
+    "金運": "計画的な支出で運気上昇",
+    "アドバイス": "落ち着いてから行動すると◎",
+    "ラッキーカラー": "緑"
+  },
+  "小吉": {
+    "総合運": "今日は少し注意が必要。",
+    "恋愛運": "思いやりを意識すると吉",
+    "金運": "浪費に注意",
+    "アドバイス": "慎重に行動してね",
+    "ラッキーカラー": "黄色"
+  },
+  "末吉": {
+    "総合運": "今日は普通の日。",
+    "恋愛運": "焦らず自然体で",
+    "金運": "大きな変化なし",
+    "アドバイス": "小さな幸せを大切に",
+    "ラッキーカラー": "紫"
+  },
+  "凶": {
+    "総合運": "今日は注意の日。",
+    "恋愛運": "誤解が起きやすいので慎重に",
+    "金運": "無駄遣いに注意",
+    "アドバイス": "ゆっくり深呼吸して",
+    "ラッキーカラー": "黒"
+  }
+};
 
-      <div id="result">function showFortune() {
+// ------------------------
+// 占いの表示
+// ------------------------
+function showFortune() {
   const name = document.getElementById("name").value;
   const birth = document.getElementById("birth").value;
 
@@ -134,38 +169,35 @@
     return;
   }
 
-  // 名前＋生年月日でハッシュ作る（同じ人は同じ結果）
   const seed = hashCode(name + birth);
   const keys = Object.keys(fortunes);
   const luck = keys[seed % keys.length];
   const data = fortunes[luck];
 
   document.getElementById("result").innerHTML = `
-    <h2>今日のあなたは...</h2>
-    <div style="font-size:48px; margin:20px 0;">${luck}</div>
-    <p><strong>総合運:</strong> ${data["総合運"]}</p>
-    <p><strong>恋愛運:</strong> ${data["恋愛運"]}</p>
-    <p><strong>金運:</strong> ${data["金運"]}</p>
-    <p><strong>アドバイス:</strong> ${data["アドバイス"]}</p>
-    <p><strong>ラッキーカラー:</strong> ${data["ラッキーカラー"]}</p>
+    <h2>今日のあなたは…</h2>
+    <div style="font-size:50px; margin:20px 0;">${luck}</div>
+
+    <p><strong>総合運：</strong>${data["総合運"]}</p>
+    <p><strong>恋愛運：</strong>${data["恋愛運"]}</p>
+    <p><strong>金運：</strong>${data["金運"]}</p>
+    <p><strong>アドバイス：</strong>${data["アドバイス"]}</p>
+    <p><strong>ラッキーカラー：</strong>${data["ラッキーカラー"]}</p>
   `;
 }
 
-// 簡単なハッシュ関数
+// ------------------------
+// 名前＋生年月日 → 固定結果用のハッシュ
+// ------------------------
 function hashCode(str) {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    hash = hash & hash;
   }
   return Math.abs(hash);
 }
-</div>
+</script>
 
-    </main>
-  </div>
-
-  <script src="horopocket.js"></script>
 </body>
 </html>
 
